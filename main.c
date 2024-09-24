@@ -56,17 +56,23 @@ void printList(Node* head) {
     }
     write_char(';');
 }
-
 /**
  *
  * @param head head of a doubly linked list
  * @return the new head
  */
-void deleteFromEnd (Node** head) {
+void deleteFromEnd(Node** head) {
     if (*head == NULL) return;
-    while ((*head)->next != NULL) head = (*head)->next;
-    head = (*head)->prev;
-    (*head)->next = NULL;
+    Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    if (temp->prev != NULL) {
+        temp->prev->next = NULL;
+    } else {
+        *head = NULL;
+    }
+    free(temp);
 }
 
 /**
@@ -120,7 +126,7 @@ main()
           count++;
       }
       if(c == 'c') {
-          deleteFromEnd(head);
+          deleteFromEnd(&head);
           count++;
       }
   } while(c != 'q');
