@@ -26,10 +26,11 @@ void freeList (List* list) {
 }
 
 Node* initNode(int value) {
-    Node* tempNode = (Node*) malloc(sizeof(Node*));
+    Node* tempNode = (Node*) malloc(sizeof(Node));
     tempNode->value = value;
     tempNode->next = NULL;
     tempNode->prev = NULL;
+    return tempNode;
 }
 
 void insertNodeAtEnd(Node** head, int value) {
@@ -110,7 +111,7 @@ main()
   Node *head = NULL;
   char * prompt = "Press q then return to quit\n";
 
-  write_string(prompt);
+ // write_string(prompt);
 
   char c;
   do {
@@ -129,18 +130,21 @@ main()
           deleteFromEnd(&head);
           count++;
       }
-  } while(c != 'q');
+  } while(c == 'a' || c == 'b' || c == 'c');
 
+    printList(head);
+    write_char('\n');
+/*
   if(c == 'q') {
 
-      write_string("Collection: ");
+      //write_string("Collection: ");
       printList(head);
       write_char('\n');
-  }else {
+  } else {
       write_string("ERROR");
       write_char('\n');
       return 1;
-  }
+  } */
 
   return 0;
 }
